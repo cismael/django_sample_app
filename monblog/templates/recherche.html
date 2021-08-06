@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %} Page De Recherche {% endblock title %}
+
+{% block content %}
+<div class="centered">
+	<h1>Recherche</h1>
+	<hr>
+	<p>Saisissez un auteur, un titre ou un mot à rechercher dans le contenu d'un article</p>
+	<form action="{% url "monblog.views.recherche" %}" method="post">
+	    {% csrf_token %}
+	    {{ form.as_p }}
+	    <input type="submit" value="Search" class="btn btn-primary"/>
+	</form>
+	<hr>
+	{% if results %}
+		<p>Résultat(s) de la recherche : [ {{ total }} ] article(s) trouvé(s).</p>
+	{% endif %}
+	{% for article in liste_des_articles %}
+    <div class="article">
+        <h3>Titre de l'article : {{ article.titre }}</h3>
+        <p>Auteur de l'article : {{ article.auteur }}</p>
+        <p>Date de parution : {{ article.date }}</p>
+        <p class="P_article"> Contenu de l'article :</p> 
+        <div class="contenuArticle"> 
+        	<!-- <p>{{ article.contenu }}</p> -->
+        	<p>{{ article.contenu|truncatewords_html:80 }}</p>
+        	<div align="center">
+	        	<p><a href="{% url "monblog.views.lireUnArticle" article.id %}" class="btn btn-success">Lire la suite</a>
+	        </div>
+        </div>
+
+        <div class="commentaires">
+		    {% if user.is_authenticated %}
+			    <p> Les commentaires de cet articles sont :</p>
+			{% else %}
+				<p id="unknownUser">Vous devez être connecté pour pouvoir commenter un article !</p>
+			{% endif %}
+
+			{% for comment in article.commentaire_set.all %} 
+		        <p id="auteur">Auteur : {{ comment.auteurDuCommentaire }} | {{ comment.dateCommentaire }}</p>
+		        <div class="contenuCommentaire"><p id="commentaireX">Commentaire : {{ comment.texteDuCommentaire }}</p></div>
+			{% empty %}
+				<p>Aucun commentaire.</p>
+			{% endfor %}
+		</div>
+	</div>				
+	{% empty %}
+	    <p>Aucun article.</p>
+	{% endfor %}
+	</div>
+{% endblock content %}

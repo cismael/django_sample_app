@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %} Page De Contact {% endblock title %}
+
+{% block content %}
+ <div class="centered">
+	<h3>FORMULAIRE DE CONTACT</h3>
+	<hr>
+	{% if envoi %}
+		<p id="success">Votre message a bien été envoyé ! </p>
+	{% endif %}
+	<form action="{% url "monblog.views.contact" %}" method="post">
+	    {% csrf_token %}
+	    {{ form.as_p }}
+	    <div class="g-recaptcha" data-sitekey="6Lc_XAATAAAAAGMLJSuX5p8eg4OM8P8hUmxS6hLZ" align="center"></div>
+	    <input type="submit" value="Envoyer" class="btn btn-primary"/>
+	</form>	
+</div>
+{% endblock content %}

@@ -1,0 +1,133 @@
+@charset "UTF-8";
+
+body{ 
+	background-color:white;
+	font-family: arial;
+ 	margin-top: 5px; 
+	height: 100%;
+	width: 100%;
+	text-align: center;
+}
+
+.bouton_conn {
+	text-align: right;
+	margin-right: 50px;
+}
+
+.content{
+	text-align: center;
+}
+
+nav {
+	text-align:center;
+	margin-top: 20px;
+	margin-left: 50px;
+	margin-right: 50px;
+	/*margin-bottom: 20px;*/
+	background-color:  black;
+	height: 35px;
+}
+
+.centered {
+	background-color: black;
+	color:#FFFFFF;
+	padding: 20px;
+ 	margin-top:20px;
+	text-align:center;
+	margin-left: 50px;
+	margin-right: 50px;
+	/*float:left;*/
+}
+
+input {
+    width: 300px;
+    height: 40px;
+} 
+
+textarea {  
+	width: 500px; 
+	height: 150px;
+	resize: horizontal; 
+	width: 150px;
+}
+
+.article{
+	background-color: rgba(200, 150, 255, 0.1);
+	margin: 10px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	width: auto;
+	clear: both;
+	border: rgb(200, 150, 255) 1px solid;
+}
+
+.P_article {
+	background-color: rgba(0, 255, 0, 0.4);
+	text-align: left;
+	margin-bottom: 5px;
+	margin-left: 30px;
+	margin-right: 30px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 15px;
+	padding-right: 15px;
+	/*width: auto;*/
+	clear: both;
+}
+
+.contenuArticle {
+	background-color: grey;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+	margin-left: 30px;
+	margin-right: 30px;
+	text-align: left;
+}
+
+.commentaires {
+	background-color: rgba(0, 255, 0, 0.1);;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+	margin-top: 5px;
+	margin-left: 30px;
+	margin-right: 30px;
+	text-align: left;
+}
+
+#auteur {
+	color: red;
+}
+
+.contenuCommentaire {
+	background-color: rgba(200, 150, 255, 0.1);
+	height: auto;
+	padding-left: 50px;
+	/*margin-right: 5px;*/
+}
+
+#unknownUser {
+	background-color: red
+}
+
+#success {
+	background-color: green
+}
+
+footer {
+	text-align:center;
+	text-decoration: white;
+	background-color: black;
+	color: white;
+	margin-top: 20px;
+	margin-left: 50px;
+	margin-right: 50px;
+	margin-bottom: 20px;
+	height: 20px;
+	padding: 10px;
+}

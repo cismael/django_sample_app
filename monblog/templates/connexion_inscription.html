@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %} Page De Contact {% endblock title %}
+
+{% block content %}
+ <div class="centered">
+ 	<h3>Connexion / Inscription</h3>
+	<hr>
+	<form id='connexion_inscription' method="post" action="#" style="display:inline;">
+		<p>
+			<a href="/connexion/" class="btn btn-primary">Vous avez déjà un compte ? <br> Connexion"</a>
+			<a href="/inscription/" class="btn btn-primary">Vous n'avez pas encore de compte ? <br> Inscription"</a>
+		</p>
+	</form>
+</div>
+{% endblock content %}

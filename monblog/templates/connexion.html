@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %} {{ titre }} {% endblock title %}
+
+{% block content %}
+ <div class="centered">
+ 	<h3>Page De Connexion</h3>
+	<hr>
+	{% if error %}
+		<p id="unknownUser"><strong>Utilisateur inconnu ou mauvais mot de passe.</strong></p>
+	{% endif %}
+	{% if user.is_authenticated %}
+		Bonjour, {{ user.username }} ! Vous êtes connecté.
+	{% else %}
+		<form action="{% url "monblog.views.connexion" %}" method="post">
+		    {% csrf_token %}
+		    {{ form.as_p }}
+		    <input type="submit" value="Se connecter" class="btn btn-primary"/>
+		</form>
+	{% endif %}
+</div>
+{% endblock content %}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+	<meta name="author" content="Ismaël COULIBALY">
+	<link rel="stylesheet" href="/media/myStyle.css"/>
+   	<link rel="stylesheet" href="/media/bootstrap/css/bootstrap.css"/>
+   	<title>{% block title %} Bienvenu sur mon blog {% endblock title %}</title>
+   	<script src='https://www.google.com/recaptcha/api.js'></script>
+</head>
+
+<body>
+	<div class="well">
+		<header>
+			<h1>Bienvenu sur mon blog écrit en Python avec Django !!!</h1>
+		</header>
+		
+		<div class="bouton_conn">
+			{% if user.is_authenticated %}
+				Bonjour, {{ user.username }} ! Vous êtes connecté.
+				<a href="/deconnexion/"><button type="button" class="btn btn-primary">Déconnexion</button></a>
+			{% else %}	 			
+				<a href="/connexion_inscription/"><button type="button" class="btn btn-primary">Se connecter / S'inscrire</button></a>
+			{% endif %}
+		</div>
+
+		<!-- Menus de navigation -->
+		 <nav>
+	       	<ul class="nav nav-pills nav-justified">
+				<li class=""><a href="/">Accueil</a></li>
+				<li class=""><a href="/articles/">Liste des articles</a></li>
+				<li class=""><a href="/recherche/">Recherche</a></li>
+				<li class=""><a href="/contact/">Contact</a></li>
+				<li class=""><a href="/mentionsLegales/">Crédit Et Mentions Légales</a></li>
+			</ul>
+	   </nav>
+
+
+		<section> 
+	       	{% block content %}
+				<div class="centered">
+					<p>	
+						<h1>Accueil</h1>
+						{% if user.is_authenticated %}
+						{% else %}	 	
+							<small>Bonjour cher visiteur, veuillez vous connecter ou vous inscrire pour avoir accès à toutes les fonctionnalités du site. </small>	
+						{% endif %}
+						<hr>
+							<ul class="nav nav-pills nav-justified">
+								<li><a href="/feeds/">Flux RSS 
+										{% load static %}
+										<img src="{% static 'flux_rss.jpg' %}" width="35"/>
+									</a>
+									<!-- <img src="../media/flux_rss.jpg" width="35"></a> -->
+								</li>
+							</ul>
+						<hr>
+						<p>Il y a en tout ( {{ total }} ) article(s) publié(s) sur mon blog.</p>
+						{% if article_dernier %}
+							Le dernier article apparu sur mon blog est le suivant :<br>
+						    <div class="article">
+						        <h3>Titre de l'article : {{ article_dernier.titre }}</h3>
+						        <p>Auteur de l'article : {{ article_dernier.auteur }}</p>
+						        <p>Date de parution : {{ article_dernier.date }}</p>
+						        <p class="P_article"> Contenu de l'article :</p> 
+						        <div class="contenuArticle"> 
+						        	<p>{{ article_dernier.contenu }}</p>
+						        </div>
+
+						    <div class="commentaires">						    
+						    {% if user_is_logged %}
+							    <p> Les commentaires de cet articles sont :</p>
+							    <form action="{% url "monblog.views.accueil"%}" method="post">
+								    {% csrf_token %}
+								    {{ form.as_p }}
+								    <input type="hidden" name="article_id" value="{{ article_dernier.id }}">
+								    <input type="submit" value="Commenter" class="btn btn-primary"/>
+								</form>
+							{% else %}
+								<p id="unknownUser">Vous devez être connecté pour pouvoir commenter un article !</p>
+							{% endif %}
+
+							{% for comment in article_dernier.commentaire_set.all %}
+						        <p id="auteur">Auteur : {{ comment.auteurDuCommentaire }} | {{ comment.dateCommentaire }}</p>
+						        <div class="contenuCommentaire"><p id="commentaireX">Commentaire : {{ comment.texteDuCommentaire }}</p></div>
+							{% empty %}
+								<p>Aucun commentaire.</p>
+							{% endfor %}
+						</div>
+						{% else %}
+						    <p>Aucun article.</p>
+						{% endif %}
+					</p>
+				</div>
+			{% endblock content %}
+	   	</section>
+
+
+		<footer>
+			<p> &copy; - Ismaël COULIBALY - 2015 - <a href="/mentionsLegales/">Crédit Et Mentions Légales <a/> </p>
+		</footer>
+	</div>
+</body>
+
+</html>

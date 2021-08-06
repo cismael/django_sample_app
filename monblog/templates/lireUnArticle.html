@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %} Page De Vue D'Un Seul Article {% endblock title %}
+
+{% block content %}
+<div class="centered">
+	<h1>Lecture D'Un Article Unique</h1>
+	<hr>
+	{% if article_exist %}
+	    <div class="article">
+	        <h3>Titre de l'article : {{ article.titre }}</h3>
+	        <p>Auteur de l'article : {{ article.auteur }}</p>
+	        <p>Date de parution : {{ article.date }}</p>
+	        <p class="P_article"> Contenu de l'article :</p> 
+	        <div class="contenuArticle"> 
+	        	<p>{{ article.contenu }}</p>
+	        </div>
+
+		 <div class="commentaires">
+		    {% if user_is_logged %}
+		    <p> Les commentaires de cet articles sont :</p>
+		    <form action="{% url "monblog.views.lireUnArticle" article.id %}" method="post">
+			    {% csrf_token %}
+			    {{ form.as_p }}
+			    <!-- <input type="hidden" name="article_id" value="{{ article.id }}"> -->
+			    <input type="submit" value="Commenter" class="btn btn-primary"/>
+			</form>
+			{% else %}
+				<p id="unknownUser">Vous devez être connecté pour pouvoir commenter un article !</p>
+			{% endif %}
+
+			{% for comment in article.commentaire_set.all %}
+		        <p id="auteur">Auteur : {{ comment.auteurDuCommentaire }} | {{ comment.dateCommentaire }}</p>
+		        <div class="contenuCommentaire"><p>Commentaire : {{ comment.texteDuCommentaire }}</p></div>
+			{% empty %}
+				<p>Aucun commentaire.</p>
+			{% endfor %}
+		</div>
+	{% else %}
+		<p>Aucun article.</p>
+	{% endif %}
+</div>
+{% endblock content %}

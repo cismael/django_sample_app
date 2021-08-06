@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %} Page Des Articles {% endblock title %}
+
+{% block content %}
+
+<div class="centered">
+	<h1>Ajout d'un nouvel article</h1>
+	<hr>
+	{% if user.is_authenticated %}
+		{% if envoi %} 
+			<p> Votre nouvel article a bien été ajouté ! </p>
+		{% else %}
+			<form action="{% url "monblog.views.addNewArticle" %}" method="post">
+			    {% csrf_token %}
+			    {{ form.as_p }}
+			    <input type="submit" value="Ajouter" class="btn btn-primary"/>
+			</form>
+		{% endif %}
+	{% else %}
+		<p id="unknownUser">Vous devez être connecté pour pouvoir ajouter un nouvel article !</p>
+	{% endif %}
+</div>
+{% endblock content %}
