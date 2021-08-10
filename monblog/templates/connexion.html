@@ -12,7 +12,7 @@
 	{% if user.is_authenticated %}
 		Bonjour, {{ user.username }} ! Vous êtes connecté.
 	{% else %}
-		<form action="{% url "monblog.views.connexion" %}" method="post">
+		<form action="{% url 'connexion' %}" method="post">
 		    {% csrf_token %}
 		    {{ form.as_p }}
 		    <input type="submit" value="Se connecter" class="btn btn-primary"/>

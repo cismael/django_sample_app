@@ -5,7 +5,7 @@ from django.utils.feedgenerator import Rss201rev2Feed
 
 from django.contrib.syndication.views import Feed
 from django.contrib.sites.models import Site
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from monblog.models import Article
 
@@ -32,4 +32,4 @@ class RssArticle(Feed):
         # datetime.combine(datetime.strptime("5 Mar 12", "%d %b %y") ,datetime.strptime("0130","%H%M").time()
 
     def item_link(self, item):
-        return reverse('monblog.views.lireUnArticle', args=[item.id])
+        return reverse('lireUnArticle', args=[item.id])

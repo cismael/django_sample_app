@@ -19,7 +19,7 @@
 		 <div class="commentaires">
 		    {% if user_is_logged %}
 		    <p> Les commentaires de cet articles sont :</p>
-		    <form action="{% url "monblog.views.lireUnArticle" article.id %}" method="post">
+		    <form action="{% url 'lireUnArticle' article.id %}" method="post">
 			    {% csrf_token %}
 			    {{ form.as_p }}
 			    <!-- <input type="hidden" name="article_id" value="{{ article.id }}"> -->

@@ -8,7 +8,8 @@ package-lock.json
 .metamask_wallet_secret
 
 # IDEs and editors
-/.idea
+.idea
+.idea/*
 *.iml
 .project
 .classpath

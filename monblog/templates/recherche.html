@@ -7,7 +7,7 @@
 	<h1>Recherche</h1>
 	<hr>
 	<p>Saisissez un auteur, un titre ou un mot à rechercher dans le contenu d'un article</p>
-	<form action="{% url "monblog.views.recherche" %}" method="post">
+	<form action="{% url 'recherche' %}" method="post">
 	    {% csrf_token %}
 	    {{ form.as_p }}
 	    <input type="submit" value="Search" class="btn btn-primary"/>
@@ -26,7 +26,7 @@
         	<!-- <p>{{ article.contenu }}</p> -->
         	<p>{{ article.contenu|truncatewords_html:80 }}</p>
         	<div align="center">
-	        	<p><a href="{% url "monblog.views.lireUnArticle" article.id %}" class="btn btn-success">Lire la suite</a>
+	        	<p><a href="{% url 'lireUnArticle' article.id %}" class="btn btn-success">Lire la suite</a>
 	        </div>
         </div>
 

@@ -11,7 +11,7 @@
 		{% if envoi %} 
 			<p> Votre nouvel article a bien été ajouté ! </p>
 		{% else %}
-			<form action="{% url "monblog.views.addNewArticle" %}" method="post">
+			<form action="{% url 'addNewArticle' %}" method="post">
 			    {% csrf_token %}
 			    {{ form.as_p }}
 			    <input type="submit" value="Ajouter" class="btn btn-primary"/>

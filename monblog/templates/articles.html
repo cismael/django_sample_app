@@ -18,14 +18,14 @@
 	        <div class="contenuArticle">
 	        	<p>{{ article.contenu|truncatewords_html:80 }}</p>
 	        	<div align="center">
-		        	<p><a href="{% url "monblog.views.lireUnArticle" article.id %}" class="btn btn-success">Lire la suite</a>
+		        	<p><a href="{% url 'lireUnArticle' article.id %}" class="btn btn-success">Lire la suite</a>
 		        </div>
 	        </div>
 
 	        <div class="commentaires">
 			    {% if user_is_logged %}
 				    <p> Les commentaires de cet articles sont :</p>
-				    <form action="{% url "monblog.views.articles"%}" method="post">
+				    <form action="{% url 'articles' %}" method="post">
 					    {% csrf_token %}
 					    {{ form.as_p }}
 					    <input type="hidden" name="article_id" value="{{ article.id }}">

@@ -17,7 +17,7 @@ class Article(models.Model):
     #         return ('/articles/', (), {})
 
 class Commentaire(models.Model):
-    article = models.ForeignKey('Article')
+    article = models.ForeignKey('Article', on_delete=models.CASCADE)
     auteurDuCommentaire = models.CharField(max_length=55)
     texteDuCommentaire = models.CharField(max_length=500)
     dateCommentaire = models.DateTimeField(auto_now_add=True, auto_now=False, verbose_name="Date de parution")
@@ -32,4 +32,4 @@ class Contact(models.Model):
     message = models.CharField(max_length=1500)
     envoyeur = models.EmailField(max_length=200)
     def __str__(self):
-		return u'%s' % self.sujet
+	    return u'%s' % self.sujet

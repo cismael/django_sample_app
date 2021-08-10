@@ -6,9 +6,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.core.context_processors import csrf
+# from django.core.context_processors import csrf
 
 from django.db.models import Q
 from django.core.mail import EmailMessage
@@ -47,10 +46,9 @@ def accueil(request):
         form = AddNewCommentaireForm()
 
     user_is_logged = False
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         user_is_logged = True
-    return render_to_response('base.html', {'form': form, 'article_dernier': dernierArticle, 'total':article_total, \
-    'les_commentaires' : dernierArticle, 'user_is_logged' : user_is_logged}, context_instance=RequestContext(request))
+    return render(request, 'base.html', {'form': form, 'article_dernier': dernierArticle, 'total': article_total, 'les_commentaires': dernierArticle, 'user_is_logged': user_is_logged})
 
 
 def articles(request):
@@ -72,10 +70,9 @@ def articles(request):
         form = AddNewCommentaireForm()
 
     user_is_logged = False
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         user_is_logged = True
-    return render_to_response('articles.html', {'form': form, 'liste_des_articles': articles, 'user_is_logged' : user_is_logged}, \
-        context_instance=RequestContext(request))
+    return render(request, 'articles.html', {'form': form, 'liste_des_articles': articles, 'user_is_logged': user_is_logged})
 
 
 def lireUnArticle(request, id):
@@ -85,7 +82,7 @@ def lireUnArticle(request, id):
     else:
         article_exist = False
     user_is_logged = False
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         user_is_logged = True
 
     envoi = False
@@ -102,8 +99,7 @@ def lireUnArticle(request, id):
             envoi = True
     else: 
         form = AddNewCommentaireForm()
-    return render_to_response('lireUnArticle.html', {'form':form, 'article' : article, 'article_exist' : article_exist, 'user_is_logged' : user_is_logged}, \
-        context_instance=RequestContext(request))
+    return render(request, 'lireUnArticle.html', {'form': form, 'article': article, 'article_exist': article_exist, 'user_is_logged': user_is_logged})
 
 
 @login_required(login_url='/connexion')
@@ -122,10 +118,9 @@ def addNewArticle(request):
     else: 
         form = AddNewArticleForm()
     user_is_logged = False
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         user_is_logged = True
-    return render_to_response('addNewArticle.html', {'form': form, 'envoi' : envoi, 'user_is_logged' : user_is_logged}, \
-        context_instance=RequestContext(request))
+    return render(request, 'addNewArticle.html', {'form': form, 'envoi': envoi, 'user_is_logged': user_is_logged})
 
 
 def recherche(request):
@@ -168,10 +163,9 @@ def recherche(request):
         results = False
 
     user_is_logged = False
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         user_is_logged = True
-    return render_to_response('recherche.html', {'form': form, 'results':results, 'liste_des_articles' : articles, 'total':article_total, 'titre': "Les articles", 'user_is_logged' : user_is_logged}, \
-        context_instance=RequestContext(request))
+    return render(request, 'recherche.html', {'form': form, 'results': results, 'liste_des_articles': articles, 'total': article_total, 'titre': "Les articles", 'user_is_logged': user_is_logged})
 
 
 def contact(request):
@@ -191,26 +185,23 @@ def contact(request):
     else: 
         form = ContactForm()
     user_is_logged = False
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         user_is_logged = True
-    return render_to_response('contact.html', {'form': form, 'envoi':envoi, 'user_is_logged' : user_is_logged}, \
-        context_instance=RequestContext(request))
+    return render(request, 'contact.html', {'form': form, 'envoi': envoi, 'user_is_logged': user_is_logged})
 
 
 def mentionsLegales(request):
     user_is_logged = False
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         user_is_logged = True
-    return render_to_response('mentionsLegales.html', {'titre': "Les articles", 'user_is_logged' : user_is_logged},\
-        context_instance=RequestContext(request))
+    return render(request, 'mentionsLegales.html', {'titre': "Les articles", 'user_is_logged': user_is_logged})
 
 
 def connexion_inscription(request):
     user_is_logged = False
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         user_is_logged = True
-    return render_to_response('connexion_inscription.html', {'titre': "Page De Connexion", 'user_is_logged' : user_is_logged}, \
-      context_instance=RequestContext(request))
+    return render(request, 'connexion_inscription.html', {'titre': "Page De Connexion", 'user_is_logged': user_is_logged})
 
 
 def connexion(request):
@@ -227,8 +218,7 @@ def connexion(request):
                 error = True
     else:
         form = ConnexionForm()
-    return render_to_response('connexion.html', { 'form': form, 'titre': "Page D'Inscription", 'error': error}, \
-        context_instance=RequestContext(request))
+    return render(request, 'connexion.html', { 'form': form, 'titre': "Page D'Inscription", 'error': error})
 
 
 def inscription(request):
@@ -253,10 +243,9 @@ def inscription(request):
     else: 
         form = InscriptionForm()  # On crée un formulaire vide
     user_is_logged = False
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         user_is_logged = True
-    return render_to_response('inscription.html', {'form':form, 'titre': "Page D'Inscription", 'user_is_logged' : user_is_logged}, \
-        context_instance=RequestContext(request))
+    return render(request, 'inscription.html', {'form': form, 'titre': "Page D'Inscription", 'user_is_logged': user_is_logged})
 
 
 def deconnexion(request):
@@ -264,7 +253,6 @@ def deconnexion(request):
     request.session.flush()
     # request.user = AnonymousUser
     user_is_logged = False
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         user_is_logged = True
-    return render_to_response('base.html', {'titre': "Page De Déconnexion", 'user_is_logged' : user_is_logged}, \
-        context_instance=RequestContext(request))
+    return render(request, 'base.html', {'titre': "Page De Déconnexion", 'user_is_logged': user_is_logged})
